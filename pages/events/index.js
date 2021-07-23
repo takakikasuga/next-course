@@ -2,11 +2,10 @@ import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
 
 import { EventList, EventsSearch } from '../../components/events/index';
-import { getAllEvents } from '../../dummy-data';
+import { getAllEvents } from '../../components/helper/api-util';
 
-const AllEventsPage = () => {
+const AllEventsPage = ({ events }) => {
   const router = useRouter();
-  const events = getAllEvents();
 
   const findEventsHandler = (year, month) => {
     const fullPath = `/events/${year}/${month}`;
@@ -20,6 +19,16 @@ const AllEventsPage = () => {
       <EventList items={events} />
     </Fragment>
   );
+};
+
+export const getStaticProps = async (context) => {
+  const events = await getAllEvents();
+  return {
+    props: {
+      events: events
+    },
+    revalidate: 60
+  };
 };
 
 export default AllEventsPage;
