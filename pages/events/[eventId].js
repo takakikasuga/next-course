@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import Head from 'next/head';
 
 import { useRouter } from 'next/router';
 import { getEventById } from '../../dummy-data';
@@ -27,6 +28,10 @@ const EventDetailPage = () => {
 
   return (
     <Fragment>
+      <Head>
+        <title>{event.title}</title>
+        <meta name='description' content={event.description} />
+      </Head>
       <h1>Event Datail</h1>
       <EventSummary title={event.title} />
       <EventLogistics
