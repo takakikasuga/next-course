@@ -13,7 +13,7 @@ function EventDetailPage(props) {
 
   if (!event) {
     return (
-      <div className="center">
+      <div className='center'>
         <p>Loading...</p>
       </div>
     );
@@ -23,10 +23,7 @@ function EventDetailPage(props) {
     <Fragment>
       <Head>
         <title>{event.title}</title>
-        <meta
-          name='description'
-          content={event.description}
-        />
+        <meta name='description' content={event.description} />
       </Head>
       <EventSummary title={event.title} />
       <EventLogistics
@@ -48,6 +45,7 @@ export async function getStaticProps(context) {
 
   const event = await getEventById(eventId);
 
+  console.log('event', event);
   return {
     props: {
       selectedEvent: event
@@ -59,7 +57,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   const events = await getFeaturedEvents();
 
-  const paths = events.map(event => ({ params: { eventId: event.id } }));
+  const paths = events.map((event) => ({ params: { eventId: event.id } }));
 
   return {
     paths: paths,
